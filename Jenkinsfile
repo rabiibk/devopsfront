@@ -18,6 +18,15 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/rabiibk/devopsfront.git']]])
             }
         }
+         stage('Set Environment') {
+                    steps {
+                        script {
+                            // Ajoutez le chemin vers npm dans le PATH
+                            def npmPath = '/root/.nvm/versions/node/v12.22.9/bin'
+                            env.PATH = "${npmPath}:${env.PATH}"
+                        }
+                    }
+                }
 
         stage('Install Dependencies') {
             steps {
