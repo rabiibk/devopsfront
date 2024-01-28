@@ -25,7 +25,7 @@ pipeline {
               script{
                // load '$NVM_DIR/nvm.sh'
                  env.PATH = "/var/lib/jenkins/.nvm/versions/node/v12.18.3/bin:${env.PATH}"
-                 sh 'npm install'
+                 sh npm install'
                 }
 
             }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 sh "curl -o angular-final.jar ${NEXUS_URL}/${NEXUS_REPO}/${ARTIFACT_GROUP}/${ARTIFACT_NAME}/${ARTIFACT_VERSION}/${ARTIFACT_NAME}-${ARTIFACT_VERSION}.tar.gz" // Télécharger l'archive depuis Nexus
 
-                sh "docker build -t angular-final:latest -f /home/rabii/docker/frontend/Dockerfile /home/rabii/docker/frontend/"
+                sh "docker build -t angular-final:latest -f /home/rabii/frontend/Dockerfile /home/rabii/frontend/"
             }
         }
 
