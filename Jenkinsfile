@@ -22,9 +22,10 @@ pipeline {
 
         stage('Install Dependencies') {
            steps {
-           dir('/var/lib/jenkins/workspace/devopsfront'){
+
+                env.PATH = "/root/.nvm/versions/node/v12.18.3/bin:${env.PATH}"
                 sh 'npm install'
-                }
+
             }
         }
 
