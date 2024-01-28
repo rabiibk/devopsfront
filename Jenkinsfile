@@ -22,7 +22,9 @@ pipeline {
 
         stage('Install Dependencies') {
            steps {
+           dir('/var/lib/jenkins/workspace/devopsfront'){
                 sh 'npm install'
+                }
             }
         }
 
