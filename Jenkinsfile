@@ -23,9 +23,9 @@ pipeline {
         stage('Install Dependencies') {
            steps {
               script{
-                //env.PATH = "/var/lib/jenkins/.nvm/versions/node/v12.18.3/bin:${env.PATH}"
-
-                sh 'npm install'
+                load '$NVM_DIR/nvm.sh'
+                env.PATH = "/var/lib/jenkins/.nvm/versions/node/v12.18.3/bin:${env.PATH}"
+                 sh 'npm install'
                 }
 
             }
