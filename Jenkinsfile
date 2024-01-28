@@ -25,11 +25,8 @@ pipeline {
               script{
 
                 load '$NVM_DIR/nvm.sh'
-                sh 'nvm use 12.18.3'
+                
                 env.PATH = "/var/lib/jenkins/.nvm/versions/node/v12.18.3/bin:${env.PATH}"
-                echo "Le chemin d'accès à Node.js est : /var/lib/jenkins/.nvm/versions/node/v12.18.3/bin/node"
-                sh 'node -v'
-                sh 'npm -v'
 
                 sh 'npm install'
                 }
