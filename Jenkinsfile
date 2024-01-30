@@ -24,7 +24,7 @@ pipeline {
            steps {
               script{
                // load '$NVM_DIR/nvm.sh'
-                 env.PATH = "/var/lib/jenkins/.nvm/versions/node/v16.20.2/bin:${env.PATH}"
+                 //env.PATH = "/var/lib/jenkins/.nvm/versions/node/v16.20.2/bin:${env.PATH}"
                  sh 'npm install'
                 }
 
