@@ -13,7 +13,8 @@ pipeline {
 
     tools {
         // Déclarez l'installation de Node.js dans Jenkins
-        nodejs '20.5.0'
+        //nodejs '20.5.0'
+        nodejs 'Nodejs'
     }
 
     stages {
