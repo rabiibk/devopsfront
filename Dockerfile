@@ -23,7 +23,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 
 # Copier le résultat de la construction dans le répertoire par défaut de Nginx
-COPY --from=builder /usr/src/app/dist/ /usr/share/nginx/html
+COPY --from=builder dist/ /usr/share/nginx/html
 
 # Exposer le port 80
 EXPOSE 80
