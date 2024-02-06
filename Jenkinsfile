@@ -55,7 +55,7 @@ pipeline {
             steps {
                 sh "curl -o summer-workshop-angular.jar ${NEXUS_URL}/${NEXUS_REPO}/${ARTIFACT_GROUP}/${ARTIFACT_NAME}/${ARTIFACT_VERSION}/${ARTIFACT_NAME}-${ARTIFACT_VERSION}.tar.gz"
                  sh 'chmod 777 /var/lib/jenkins/workspace/devopsfront/Dockerfile'
-               sh "docker build -t java:back /var/lib/jenkins/workspace/devopsfront
+               sh "docker build -t java:back /var/lib/jenkins/workspace/devopsfront"
             }
         }
 
