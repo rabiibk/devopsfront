@@ -54,8 +54,8 @@ pipeline {
         stage('Pull & Build Docker Image') {
             steps {
                 sh "curl -o summer-workshop-angular.jar ${NEXUS_URL}/${NEXUS_REPO}/${ARTIFACT_GROUP}/${ARTIFACT_NAME}/${ARTIFACT_VERSION}/${ARTIFACT_NAME}-${ARTIFACT_VERSION}.tar.gz"
-
-                sh "docker build -t summer-workshop-angular:latest -f /home/rabii/frontend/Dockerfile /home/rabii/frontend/"
+                 sh 'chmod 777 /var/lib/jenkins/workspace/devopsfront/Dockerfile'
+               sh "docker build -t java:back /var/lib/jenkins/workspace/devopsfront
             }
         }
 
