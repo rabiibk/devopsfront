@@ -4,11 +4,13 @@ pipeline {
     environment {
         NEXUS_URL = 'http://192.168.12.150:8081'
         NEXUS_REPO = 'repository/maven-releases'
-        ARTIFACT_GROUP = 'tn.example'
+        ARTIFACT_GROUP = 'front.angular'
         ARTIFACT_NAME = 'summer-workshop-angular'
         ARTIFACT_VERSION = "1.0.${env.BUILD_NUMBER}"
         DOCKER_REPO = 'rabii1990/frontend'
-        DOCKER_IMAGE_TAG = 'latest'
+        DOCKER_IMAGE_TAG = 'angular'
+        DOCKER_IMAGE_NAME2 = 'rabiifront2'
+        DOCKER_IMAGE_TAG2 = 'angular2'
     }
 
     tools {
@@ -56,13 +58,29 @@ pipeline {
             steps {
                 sh "curl -o summer-workshop-angular.jar ${NEXUS_URL}/${NEXUS_REPO}/${ARTIFACT_GROUP}/${ARTIFACT_NAME}/${ARTIFACT_VERSION}/${ARTIFACT_NAME}-${ARTIFACT_VERSION}.tar.gz"
                 sh 'chmod 777 /var/lib/jenkins/workspace/devopsfront/Dockerfile'
-                sh "docker build -t summer-workshop-angular:latest /var/lib/jenkins/workspace/devopsfront"
+                sh "docker build -t angular:angular /var/lib/jenkins/workspace/devopsfront"
             }
         }
+        stage('Push Docker Image to Nexus') {
+                    steps {
+                        withCredentials([usernamePassword(credentialsId: 'nexus', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                            sh "docker login -u admin -p nexus http://192.168.12.150:8083/"
+                            //sh "docker login -u admin --password-stdin http://192.168.12.150:8083/ < ~/.docker/config.json"
+
+                        }
+
+                        script {
+
+                            sh "docker tag  angular:angular 192.168.12.150:8083/${DOCKER_IMAGE_NAME2}:${DOCKER_IMAGE_TAG2}"
+                            sh "docker push 192.168.12.150:8083/${DOCKER_IMAGE_NAME2}:${DOCKER_IMAGE_TAG2}"
+
+                      }
+                    }
+                }
 
         stage('Push Docker Image to Docker Hub') {
             steps {
-                sh "docker tag summer-workshop-angular:latest ${DOCKER_REPO}:${DOCKER_IMAGE_TAG}"
+                sh "docker tag angular:angular ${DOCKER_REPO}:${DOCKER_IMAGE_TAG}"
                 sh "docker login -u rabii1990 -p rabiiradar2012"
                 sh "docker push ${DOCKER_REPO}:${DOCKER_IMAGE_TAG}"
             }
