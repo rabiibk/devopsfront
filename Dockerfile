@@ -1,5 +1,5 @@
 ## Stage 1: Builder
-FROM node:18.19.0 as builder
+#FROM node:18.19.0 as builder
 #
 #WORKDIR /usr/src/app
 #
@@ -30,6 +30,8 @@ FROM node:18.19.0 as builder
 #
 ## Commande pour exécuter le serveur Nginx
 #CMD ["nginx", "-g", "daemon off;"]
+# stage 1
+FROM node:18.19.0 as builder
 WORKDIR /app
 COPY . .
 RUN npm install
@@ -37,4 +39,6 @@ RUN npm run build --prod
 
 # stage 2
 FROM nginx:alpine
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist/summer-workshop-angular /usr/share/nginx/html
+
