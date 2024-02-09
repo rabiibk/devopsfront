@@ -1,0 +1,15 @@
+/* styles.css ou styles.scss */
+.navbar-collapse {
+  display: flex;
+  justify-content: space-between; /* Aligne les éléments avec un espace entre eux */
+  align-items: center; /* Centre les éléments verticalement */
+}
+
+.green-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
